@@ -34,7 +34,7 @@ The project is organized into frontend resources and backend API endpoints.
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/abSWU/ColorsLab.git
 
 ## AI Usage
 Parts of the project had AI involvement to help solve problems. For example, AI assisted in figuring out how to securely put database login information into a .env so that no one could see the actual login info. AI was also used in figuring out SSH problems during the DigitalOcean setup.
