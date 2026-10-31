@@ -1,0 +1,31 @@
+@startuml
+title COLORS - Login Activity
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor White
+  BorderColor Black
+  DiamondBackgroundColor White
+  DiamondBorderColor Black
+  StartColor Black
+  EndColor Black
+  RoundCorner 18
+}
+start
+:Open login page (index.html);
+repeat
+  :Enter username and password;
+  :Click Login;
+  :doLogin() sends POST to Login.php;
+  :Login.php checks Users database;
+  if (Valid credentials?) then (Yes)
+    :Return user ID and name;
+    :Save user cookie (20 minutes);
+    :Navigate to color.html;
+    :Display COLORS page;
+    stop
+  else (No)
+    :Show incorrect username/password message;
+  endif
+repeat while (Try logging in again?) is (Yes) not (No)
+stop
+@enduml

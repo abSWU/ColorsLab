@@ -1,0 +1,63 @@
+@startuml
+title COLORS Web Application - Conceptual Class Diagram
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+left to right direction
+
+class "User" as User <<database entity>> {
+  +ID : integer
+  +firstName : string
+  +lastName : string
+  +Login : string
+  +Password : string
+}
+
+class "Color" as Color <<database entity>> {
+  +UserId : integer
+  +Name : string
+}
+
+class "Colors Web App" as WebApp <<JavaScript functions>> {
+  -userId : integer
+  -firstName : string
+  -lastName : string
+  +doLogin()
+  +saveCookie()
+  +readCookie()
+  +doLogout()
+  +addColor()
+  +searchColor()
+}
+
+class "Login.php" as LoginAPI <<PHP API>> {
+  +getRequestInfo()
+  +returnWithInfo(firstName, lastName, id)
+  +returnWithError(error)
+}
+class "AddColor.php" as AddAPI <<PHP API>> {
+  +getRequestInfo()
+  +returnWithError(error)
+}
+class "SearchColors.php" as SearchAPI <<PHP API>> {
+  +getRequestInfo()
+  +returnWithInfo(searchResults)
+  +returnWithError(error)
+}
+
+User "1" -- "0..*" Color : owns (via UserId)
+WebApp ..> LoginAPI : login credentials
+WebApp ..> AddAPI : color + userId
+WebApp ..> SearchAPI : search + userId
+LoginAPI ..> User : queries Users table
+AddAPI ..> Color : inserts into Colors
+SearchAPI ..> Color : searches Colors
+
+note bottom of User
+  User and Color represent database records.
+  PHP and JavaScript files are procedural,
+  shown as conceptual UML classifiers.
+  The SQL schema was not supplied;
+  column types and ownership multiplicity
+  are inferred from the code.
+end note
+@enduml
