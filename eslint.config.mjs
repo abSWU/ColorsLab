@@ -1,4 +1,4 @@
-
+import globals from "globals";
 export default [
   {
     files: ["**/*.js"],
@@ -22,6 +22,15 @@ export default [
       "no-unused-vars": "warn",
       "no-undef": "error",
       "no-debugger": "error"
+    }
+  },
+  {
+    files: ["tests/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.jest
+      }
     }
   }
 ];
